@@ -1,0 +1,51 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: arial;
+  font-size: 15;
+  background: black;
+  color: white;
+}
+
+.XmasTree {
+  position: relative;
+  font-family: Arial Black, Gadget, sans-serif;
+  font-size:5px;
+}
+.XmasTree > P {
+  text-align: center;
+  height: 0em;
+  letter-spacing: 0.8em;
+  font-weight: bold;
+  color: #9f9;
+}
+
+.ControlPanel {
+  display: flex;
+  width: 200px;
+  height: 25px;
+  align-items: center;
+  margin: 10px;
+}
+
+.ControlPanel > select {
+  margin: 8px;
+  width: 70px;
+  font-size: 10pt;
+}
+
+#Greeting {
+  text-align: center;
+  height: 2em;
+  font-family: Arial Black, Gadget, sans-serif;
+  font-weight: bold;
+  font-size:20pt;
+}
+
+HR {
+  border-top:0; border-color: #666;
+}
