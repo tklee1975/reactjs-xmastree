@@ -14,7 +14,7 @@ body {
 .XmasTree {
   position: relative;
   font-family: Arial Black, Gadget, sans-serif;
-  font-size:5px;
+  font-size:9px;
 }
 .XmasTree > P {
   text-align: center;
@@ -25,7 +25,6 @@ body {
 }
 
 .ControlPanel {
-  display: flex;
   width: 200px;
   height: 25px;
   align-items: center;

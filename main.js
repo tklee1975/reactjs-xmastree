@@ -32,24 +32,26 @@ function getXmasArray(treeSize) {
 var ChristmasTree = React.createClass({
   getDefaultProps: function() {
     return {
-      treeSize: 8,
+      treeSize: 7,
+      treeIcon: "🙂"
     };
   },
 
   render: function() {
     var treeArray = getXmasArray(this.props.treeSize);
+    var treeIcon = this.props.treeIcon;
 
     var renderTreeRow = function(treeLen, index) {
       var str = "";
-      for(var i=0; i<treeLen; i++) {
-        str += "*";
+      for(var i=0; i<treeLen*2-1; i++) {
+        str += treeIcon;
       }
 
-      return <p>{str}</p>;
+      return <p style={{height: '0.5em'}} >{str}</p>;
     };
     var treeH = treeArray.length;
     var style = {
-      height: (treeH - 3) + "em",
+      height: (treeH) * 1.5 + "em",
     }
 
     return <div className="XmasTree" style={style}>{treeArray.map(renderTreeRow)}</div>;
@@ -59,7 +61,7 @@ var ChristmasTree = React.createClass({
 
 var ChristmasTreeMain = React.createClass({
   getInitialState: function() {
-    return {treeSize: 10};
+    return {treeSize: 7, treeIcon: '❤️'};
   },
 
   onTreeSizeChange: function() {
@@ -67,18 +69,30 @@ var ChristmasTreeMain = React.createClass({
     console.log("newSize=" + newSize);
 
     this.setState(
-      { treeSize: newSize } 
+      { treeSize: newSize }
+    );
+  },
+
+  onTreeIconChange: function() {
+    var newIcon = this.refs.treeIcon.value;
+
+    this.setState(
+      { treeIcon: newIcon }
     );
   },
 
 
   render: function() {
-    var tree = <ChristmasTree treeSize={this.state.treeSize}/>;
+    var tree = <ChristmasTree treeSize={this.state.treeSize}
+                              treeIcon={this.state.treeIcon}/>;
 
+    // Options for Tree height
     var options = [];
-    for(var i=3; i<=10; i++) {
+    for(var i=3; i<=8; i++) {
       options.push(i);
     }
+
+    console.log("rendering the options");
     var optionsHtml = options.map(
 				function(option) {
 					return <option value={option}>{option}</option>;
@@ -86,16 +100,38 @@ var ChristmasTreeMain = React.createClass({
 		);
 
 
-    console.log("OPtions: " + options);
+    // Options for Tree Char
+    var iconOptions = ['@', '#', '*', '🙂', '❤️', '💑', '⭐️', '🎄'];
+
+    console.log("rendering the char options");
+    var iconOptionsHtml = iconOptions.map(
+				function(option) {
+					return <option value={option}>{option}</option>;
+				}
+		);
+
+
+
+    console.log("Options: " + options);
 
     return (
       <div className="Main">
-      <div className="ControlPanel">
-        <b>Tree Size:</b>
+      <div>
+      <span className="ControlPanel">
+        <b>Tree Height:</b>
         <select ref="treeSize" defaultValue={this.state.treeSize} onChange={this.onTreeSizeChange}>
         {optionsHtml}
         </select>
+      </span>
+
+      <span className="ControlPanel">
+        <b>Tree Icon:</b>
+        <select ref="treeIcon" defaultValue={this.state.treeIcon} onChange={this.onTreeIconChange}>
+        {iconOptionsHtml}
+        </select>
+      </span>
       </div>
+
       <hr noshade/>
       {tree}
       <p id="Greeting">Merry Christmas</p>
